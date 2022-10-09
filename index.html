@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>HTML CSS JS</title>
+</head>
+
+<body>
+    <div class="input-group mb-3 w-50 m-auto mt-2">
+        <input id="addtext" type="text" class="form-control" aria-label="Sizing example input"
+            aria-describedby="inputGroup-sizing-default">
+        <button class="btn btn-primary" id="inputGroup-sizing-default">ADD TASK</button>
+
+    </div>
+    <ul class="list-group mb-3 w-50 m-auto mt-2">
+
+
+    </ul>
+    <script>
+
+
+
+        // JavaScript
+
+        let inputtext = document.querySelector("#addtext");
+        let bttn = document.querySelector("#inputGroup-sizing-default");
+        let ul = document.querySelector(".list-group");
+        let liList;
+        let i;
+        let check;
+        let urgent;
+
+        bttn.addEventListener("click", function (addtask) {
+            if (inputtext.value == " " || inputtext.value.length == 0) {
+                alert("Don't leave task bar empty");
+            }
+            else {
+                liList = document.createElement("li");
+                check = document.createElement("i");
+                check.classList = "fa-solid fa-check  float-end d-inline-block mr-2 ";
+                check.style.marginRight = "5px"
+                check.addEventListener("click", function () {
+                    this.parentElement.style.textDecoration = "line-through";
+                    this.parentElement.style.backgroundColor= "green";
+                    this.parentElement.style.color= "white";
+
+                })
+                i = document.createElement("i");
+                i.classList = "fa-solid fa-trash float-end";
+                i.addEventListener("click", function () {
+                    let sorgu = confirm("Are you sure to execute this action?")
+                    if (sorgu) {
+                        this.parentElement.remove()
+                    }
+                })
+                urgent = document.createElement("i");
+                urgent.classList = "fa-solid fa-bolt float-end";
+                urgent.style.marginRight = "5px";
+                urgent.addEventListener("click", function (){
+                    alert ("This task has been saved as Urgent");
+                    this.parentElement.style.backgroundColor = "red";
+                    this.parentElement.style.color = "white";
+                })
+                liList.innerText = inputtext.value;
+                liList.appendChild(i);
+                liList.appendChild(check);
+                liList.appendChild(urgent);
+                liList.classList = "list-group-item";
+                ul.appendChild(liList);
+                inputtext.value = "";
+            }
+        })
+
+    </script>
+</body>
+
+</html>
